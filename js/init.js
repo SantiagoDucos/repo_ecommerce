@@ -26,7 +26,6 @@ var getJSONData = function(url){
         throw Error(response.statusText);
       }
     })
-    .then(function(response) {
           result.status = 'ok';
           result.data = response;
           hideSpinner();
