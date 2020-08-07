@@ -15,6 +15,8 @@ var hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
+// THIS FUNCTION RETURNS AN OBJECT WITH THE DATA OF THE URL ENTERED
+// IF THERE IS AN ERROR, THIS OBJECT RETURNS THE ERROR
 var getJSONData = function(url){
   var result = {};
   showSpinner();

@@ -1,11 +1,12 @@
-// SHOW THE ARTICLES
+// THIS FUCION SHOWS THE ARTICLES IN THE HTML
 function showCars(articles) {
   let htmlContentToAppend = "";
   let numberOfArticles = articles.length;
   let i;
+  let article;
 
   for (i = 0; i < numberOfArticles; i++) {
-    let article = articles[i];
+    article = articles[i];
 
     htmlContentToAppend += `
     <div class="list-group-item list-group-item-action">
@@ -31,10 +32,13 @@ function showCars(articles) {
 // THIS FUNCTION IS EXECUTED WHEN THE PAGE IS LOADED
 document.addEventListener("DOMContentLoaded", function (e) {
   let articlesArray = [];
+  // WE EXTRACT THE INFORMATION FROM THE URL OF PRODUCTOS_URL
   getJSONData(PRODUCTS_URL).then(function (resultObj) {
-    if (resultObj.status === "ok") {
+    if (resultObj.status === "ok") { // IF THE STATUS IS ok
       articlesArray = resultObj.data;
       showCars(articlesArray);
+    } else { // IF THE STATUS IS NO ok
+      alert("Ha ocurrido un error, intente mas tarde");
     }
   });
 });
