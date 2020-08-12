@@ -19,8 +19,8 @@ function showCars(articles) {
             <h4 class="mb-1">`+ article.name + `</h4>
             <small class="text-muted">` + article.soldCount + ` vendidos</small>
           </div>
-          <p>` + article.description + `</p>
-          <p>` + article.cost + " " + article.currency + `</p>
+          <p class="mb-1">` + article.description + `</p>
+          <p class="mb-1">` + article.cost + " " + article.currency + `</p>
         </div>
       </div>
     </div>`;
