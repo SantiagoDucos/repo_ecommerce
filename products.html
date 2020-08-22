@@ -20,14 +20,21 @@
 
 <body>
 
-    <!-- NAVIGATION BAR -->
+    <!-- BARRA DE NAVEGACION -->
     <nav class="site-header sticky-top py-1 bg-dark">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
+
             <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
             <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
             <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
             <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
             <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+
+            <div id="user-container" style="display:inline; display: none;">
+                <p class="py-2 d-none d-md-inline-block" style="color: white; margin-bottom: 0;" id="user-identifier"></p>
+                <button id="sign-of" class="btn btn-danger ">Salir</button>
+            </div>
+
         </div>
     </nav>
 
@@ -137,6 +144,7 @@
     <!-- SCRIPT -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/user-logged.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
 
