@@ -9,6 +9,8 @@ var currentSortCriteria = undefined;
 // VARIABLES GLOBALES DE RANGO DEL PRECIO DE LOS ARTICULOS
 var minCost = undefined;
 var maxCost = undefined;
+// VARIABLE GLOBAL DE PALABRA RELACINADA
+var searchedWord = undefined; 
 
 
 // ESTA FUNCION ORDENA (SEGUN UN CRITERIO INGRESADO) Y RETORNA UN ARRAY DE PRODUCTOS INGRESADO
@@ -64,28 +66,33 @@ function showProducts() {
     for (let i = 0; i < cantidadDeProductos; i++) {
         
         let product = currentProductsArray[i];
+        // ESTRAEMOS EL NOMBRE Y LA DESCRIPCION DEL PRUDUCTO
+        let nameAndDescription = product.name + product.description;
 
         // SE FILTRA SEGÚN LA INFORMACION QUE INGRESA EL USUARIO
         if (((minCost == undefined) || (minCost != undefined && product.cost >= minCost)) &&
             ((maxCost == undefined) || (maxCost != undefined && product.cost <= maxCost))) {
-
-            htmlContentToAppend += `
-            <a href="category-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ product.name + `</h4>
-                            <small class="text-muted">` + product.soldCount + ` vendidos</small>
+            
+            // BUSCAMOS SI HAY COINCIDENCIA CON LA PALABRA INGRESADA
+            if (searchedWord == undefined || (nameAndDescription.toLowerCase().indexOf(searchedWord) != -1)) {
+                htmlContentToAppend += `
+                <a href="category-info.html" class="list-group-item list-group-item-action">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
                         </div>
-                        <p class="mb-1">` + product.description + `</p>
-                        <p class="mb-1">` + product.cost + " " + product.currency + `</p>
+                        <div class="col">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">`+ product.name + `</h4>
+                                <small class="text-muted">` + product.soldCount + ` vendidos</small>
+                            </div>
+                            <p class="mb-1">` + product.description + `</p>
+                            <p class="mb-1">` + product.cost + " " + product.currency + `</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            `;
+                </a>
+                `;
+            }
         }
 
         // SE MUESTRA EL PRODUCTO EN LA PAGINA HTML
@@ -194,4 +201,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
         // MOSTRAMOS LAS CATEGORIAS SEGUN LOS VALORES INGRESADOS
         showProducts();
     });
+
+    // EVENTO PARA BUSCAR UNA PALABRA RELACIONADA CON EL NOMBRE O LA DESCRIPCION
+    document.getElementById("input-search-word").addEventListener("input", function() {
+
+        searchedWord = document.getElementById("input-search-word").value.toLowerCase();
+
+        showProducts(currentProductsArray);
+    });
+
+    // EVENTO PARA LIMPIAR LA PALABRA BUSCADA
+    document.getElementById("btn-clean-search-word").addEventListener("click", function () {
+        
+        document.getElementById("input-search-word").value = "";
+
+        searchedWord = undefined;
+
+        showProducts(currentProductsArray);
+    })
 });

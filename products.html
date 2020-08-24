@@ -50,7 +50,7 @@
 
         <div class="container">
 
-            <!-- FILTROS -->
+            <!-- ORDENAMIENTO DE LOS PRODUCTOS -->
             <div class="row">
                 <div class="col text-right">
                     <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
@@ -80,8 +80,31 @@
                 </div>
             </div> <!-- class="row" -->
 
+            <!-- BUSCAR PALABRA RELACIONADA O ASOCIADA AL NOMBRE Y DESCRIPCION-->
             <div class="row justify-content-end">
-                <div class="col-md-6"></div>
+
+                <div class="col-md-6 col-sm-12 mb-1 container">
+                    <div class="row container p-0 m-0">
+
+                        <p class="font-weight-normal text-right my-2" style="width: 80px; margin-right: 30px;">Buscador:</p>
+
+                        <!-- INPUT PARA INGRESAR LA PALABRA HA BUSCAR -->
+                        <input class="form-control" type="text" placeholder="Palabra rel." id="input-search-word" 
+                               style="width: 150px; margin-right: 15px;">
+
+                        <!-- BOTONES DE FILTRAR Y LIMPIAR-->
+                        <div class="col-3 p-0">
+                            <div class="btn-group" role="group">
+
+                                <!-- BOTON PARA QUITAR EL FLITRO DE RANGO -->
+                                <button class="btn btn-link btn-sm" id="btn-clean-search-word">Borrar</button>
+
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+
                 <div class="col-md-6 col-sm-12 mb-1 container">
                     <div class="row container p-0 m-0">
 
