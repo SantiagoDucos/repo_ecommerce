@@ -76,18 +76,18 @@ function showProducts() {
             // BUSCAMOS SI HAY COINCIDENCIA CON LA PALABRA INGRESADA
             if (searchedWord == undefined || (nameAndDescription.toLowerCase().indexOf(searchedWord) != -1)) {
                 htmlContentToAppend += `
-                <a href="category-info.html" class="list-group-item list-group-item-action">
+                <a href="product-info.html" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-3">
-                            <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                            <img src="${ product.imgSrc}" alt="${ product.description }" class="img-thumbnail">
                         </div>
                         <div class="col">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">`+ product.name + `</h4>
-                                <small class="text-muted">` + product.soldCount + ` vendidos</small>
+                                <h4 class="mb-1">${ product.name }</h4>
+                                <small class="text-muted">${ product.soldCount } vendidos</small>
                             </div>
-                            <p class="mb-1">` + product.description + `</p>
-                            <p class="mb-1">` + product.cost + " " + product.currency + `</p>
+                            <p class="mb-1">${ product.description }</p>
+                            <p class="mb-1">${ product.cost } ${product.currency}</p>
                         </div>
                     </div>
                 </a>
