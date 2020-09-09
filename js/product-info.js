@@ -1,5 +1,28 @@
 var product = {};
 var comments = [];
+var products = [];
+
+function showRelatedProducts(allProducts, relatedProducts) {
+
+    let htmlContentToAppend = "";
+
+    relatedProducts.forEach(function (indice) {
+        htmlContentToAppend += `
+        <div class="col-md-4">
+            <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                <img class="bd-placeholder-img card-img-top"  src="${allProducts[indice].imgSrc}">
+                <h3 class="m-3">${allProducts[indice].name}</h3>
+                <div class="card-body">
+                    <p class="card-text">${allProducts[indice].cost} ${allProducts[indice].currency}</p>
+                </div>
+            </a>
+        </div>
+        `;
+    });
+
+    document.getElementById("div-productos-relacionados").innerHTML = htmlContentToAppend;
+
+}
 
 // ESTA FUNCION MUESTRA EN PANTALLA LAS IMAGENES
 function showImagesGallery(imagenesArray) {
@@ -102,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () { // SE VAN A EJECUTAR
 
             product = resultObj.data;
 
+            // TODO: CREAR UNA FUNCION SHOWPRODUCT
             let nombreDelProducto  = document.getElementById("nombreDelProducto");
             let descripcionDelProducto = document.getElementById("descripcionDelProducto");
             let precioDelProducto = document.getElementById("precioDelProducto");
@@ -123,6 +147,15 @@ document.addEventListener("DOMContentLoaded", function () { // SE VAN A EJECUTAR
             comments = resultObj.data;
             comments = ordenarDesendenteComentariosPorFecha(comments);
             showComments(comments);
+        }
+
+    });
+
+     getJSONData(PRODUCTS_URL).then(function (resultObj) {
+
+        if (resultObj.status === "ok") {
+            products = resultObj.data;
+            showRelatedProducts(products, product.relatedProducts);
         }
 
     });
