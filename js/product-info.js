@@ -24,7 +24,7 @@ function showRelatedProducts(allProducts, relatedProducts) {
 
 }
 
-// ESTA FUNCION MUESTRA EN PANTALLA LAS IMAGENES
+// ESTA FUNCION MUESTRA LAS IMAGENES EN PANTALLA
 function showImagesGallery(imagenesArray) {
 
     let htmlContentToAppend = "";
@@ -100,7 +100,6 @@ function showComments(comentariosArray) {
         for (let i = comentario.score + 1; i <= 5; i++) {
             htmlContentToAppend += '<span class="fa fa-star"></span>';
         }
-
             
         htmlContentToAppend += `</p><div style="display: flex;">
             
@@ -113,6 +112,18 @@ function showComments(comentariosArray) {
         document.getElementById("comentariosCalificaciones").innerHTML = htmlContentToAppend;
     }
 
+}
+
+// ESTA FUNCION CUENTA LA CANTIDAD DE ENTRELLAS QUE SELECCIONÓ EL CLIENTE
+function getRating(radioBtn) {
+
+    let score = 0;
+    radioBtn.forEach(function (radio) {
+        if (radio.checked) {
+            score = parseInt(radio.value);
+        }
+    });
+    return score;
 }
 
 // CUANDO SE CARGUE LA PAGINA
@@ -167,49 +178,64 @@ document.addEventListener("DOMContentLoaded", function () { // SE VAN A EJECUTAR
         document.getElementById("calificacion").style = "display: inline-block";
     }
 
-});
 
-document.getElementById("btn-calificacion").addEventListener("click", function () {
 
-    // EXTRAEMOS LA INFORMACION DE LA CALIFICACION
-    let comentrario = document.getElementById("ta-comentario").value;
-    let calificacion = parseInt(document.getElementById("slct-calificacion").value);
 
-    if (comentrario != "" && calificacion != 0) {
+    document.getElementById("btn-enviar-calificacion").addEventListener("click", function () {
 
-        comentarioParaAgregar = {};
+        // EXTRAEMOS EL COMENTARIO
+        let elementoTextArea = document.getElementById("ta-comentario"); 
+        let comentrario = elementoTextArea.value;
+    
+        if (comentrario != "") {
+    
+            comentarioParaAgregar = {};
+    
+            // EXTRAEMOS EL NOMBRE DE USUARIO
+            let userLogged = localStorage.getItem('user-logged');
+            userLogged = JSON.parse(userLogged);
+            let email = userLogged.email;
+    
+            // EXTRAEMOS LA FECHA Y HORA
+            let dateTime = new Date();
+            let fechaHora = `
+            ${dateTime.getFullYear()}-${dateTime.getMonth() + 1}-${dateTime.getDate()} 
+            ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}
+            `;
+    
+            let elements = document.getElementsByName("rating");
+            
+            // CREAMOS EL COMENTARIO
+            comentarioParaAgregar = {
+                "score": getRating(elements),
+                "description": comentrario,
+                "user": email,
+                "dateTime": fechaHora
+            }
+    
+            // AGREGAMOS EL COMENTARIO A LAS OTROS COMENTARIOS
+            comments.unshift(comentarioParaAgregar);
+    
+            // MOSTRAMOS NUEVAMENTE LOS COMENTARIOS
+            showComments(comments);
+            
+            elementoTextArea.value = "";
+            elements.forEach(function (radio) {
+    
+                if (radio.value == 5) {
+                    radio.checked = true;
+                }
+            });
 
-        // EXTRAEMOS EL NOMBRE DE USUARIO
-        let userLogged = localStorage.getItem('user-logged');
-        userLogged = JSON.parse(userLogged);
-        let email = userLogged.email;
-
-        // EXTRAEMOS LA FECHA Y HORA
-        let dateTime = new Date();
-        let fechaHora = `${dateTime.getFullYear()}-${dateTime.getMonth() + 1}-${dateTime.getDay() - 1} `;
-        fechaHora += `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
-
-        // CREAMOS EL COMENTARIO
-        comentarioParaAgregar = {
-            "score": calificacion,
-            "description": comentrario,
-            "user": email,
-            "dateTime": fechaHora
+            document.getElementById("prueba").scrollIntoView({behavior: "smooth"});
+    
+        } else {
+            
+            alert("Debe completar el comentario y la calificación");
         }
+    });
 
-        // AGREGAMOS EL COMENTARIO A LAS OTROS COMENTARIOS
-        comments.unshift(comentarioParaAgregar);
 
-        // MOSTRAMOS NUEVAMENTE LOS COMENTARIOS
-        showComments(comments);
 
-        document.getElementById("ta-comentario").value = "";
-        document.getElementById("slct-calificacion").value = "0";
-
-        alert(`Gracias ${email} por su calificación!`);
-
-    } else {
-        
-        alert("Debe completar el comentario y la calificación");
-    }
 });
+

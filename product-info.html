@@ -22,7 +22,9 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
 
-        <link rel="stylesheet" href="css/product-info.css">
+        <link rel="stylesheet" href="css/product-info.css" />   
+        <link rel="stylesheet" href="css/stars-to-rate.css">
+        <link rel="stylesheet" href="css/user-logged.css">
     </head>
 
     <body>
@@ -47,18 +49,29 @@
                     >Mi carrito</a
                 >
 
-                <div id="user-container" style="display: inline; display: none">
-                    <p
-                        class="py-2 d-none d-md-inline-block"
-                        style="
-                            color: white;
-                            margin-bottom: 0;
-                            margin-right: 10px;
-                        "
-                        id="user-identifier"
-                    ></p>
-                    <button id="sign-of" class="btn btn-danger">Salir</button>
+                <div class="dropdown" id="user-container" style="display: none;">
+                    <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <p class="" id="user-identifier"></p>
+                    </button>
+                    <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                        <a class="dropdown-item" href="#">Ver perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" id="sign-of"
+                            >Salir</a
+                        >
+                    </div>
                 </div>
+
             </div>
         </nav>
 
@@ -109,13 +122,13 @@
                         ></div>
                     </dd>
 
-                    <dt><h4>Comentarios y claificaciones</h4></dt>
+                    <dt><h4 id="prueba">Comentarios y claificaciones</h4></dt>
                     <dd>
                         <p id="comentariosCalificaciones"></p>
                     </dd>
                 </dl>
 
-                <div id="calificacion" style="display: none;">
+                <div id="calificacion" style="display: none">
                     <h3 style="margin-bottom: 1.6rem; margin-top: 7rem">
                         ¿Compraste el produto? ¡Cuéntanos que te pareció!
                     </h3>
@@ -128,12 +141,65 @@
                         placeholder="Escribe aquí!"
                     ></textarea>
 
-                    <h2 style="margin-top: 1.9rem; margin-bottom: 1.1rem">
-                        Calificación del producto
-                    </h2>
+                    <div>
+                        <h3 id="h3-califica-estrellas">
+                            Califica con estrellas!
+                        </h3>
+                        <!-- ESTRELLAS -->
+                        <div class="star-rating" id="div-estrellas">
+                            <input
+                                id="star-5"
+                                type="radio"
+                                name="rating"
+                                value="5"
+                                checked
+                            />
+                            <label for="star-5" title="5 stars">
+                                <i class="active fa fa-star"></i>
+                            </label>
 
-                    <div style="display: flex">
-                        <select
+                            <input
+                                id="star-4"
+                                type="radio"
+                                name="rating"
+                                value="4"
+                            />
+                            <label for="star-4" title="4 stars">
+                                <i class="active fa fa-star"></i>
+                            </label>
+
+                            <input
+                                id="star-3"
+                                type="radio"
+                                name="rating"
+                                value="3"
+                            />
+                            <label for="star-3" title="3 stars">
+                                <i class="active fa fa-star"></i>
+                            </label>
+
+                            <input
+                                id="star-2"
+                                type="radio"
+                                name="rating"
+                                value="2"
+                            />
+                            <label for="star-2" title="2 stars">
+                                <i class="active fa fa-star"></i>
+                            </label>
+
+                            <input
+                                id="star-1"
+                                type="radio"
+                                name="rating"
+                                value="1"
+                            />
+                            <label for="star-1" title="1 star">
+                                <i class="active fa fa-star"></i>
+                            </label>
+                        </div>
+
+                        <!--<select
                             class="custom-select d-block"
                             id="slct-calificacion"
                             style="width: 10rem"
@@ -144,37 +210,24 @@
                             <option value="3">⭐⭐⭐</option>
                             <option value="4">⭐⭐⭐⭐</option>
                             <option value="5">⭐⭐⭐⭐⭐</option>
-                        </select>
+                        </select>-->
 
-                        <div style="width: 50rem"></div>
-
-                        <button
-                            class="btn btn-primary"
-                            id="btn-calificacion"
-                            style="width: 8rem"
-                        >
-                            Enviar
-                        </button>
+                        
                     </div>
-                    
+
+                    <button class="btn btn-outline-primary" id="btn-enviar-calificacion">
+                        Enviar
+                    </button>
+
                 </div>
 
-                <h4 id="titulo-productos-relacionados">
+                <h3 id="titulo-productos-relacionados">
                     Productos relacionados
-                </h4>
-
+                </h3>
                 <div id="div-productos-relacionados" class="row">
                     <!-- ACÁ SE VAN A MOSTRAR LOS PRODUCTOS RELACIONADOS -->
                 </div>
 
-                <!-- Por ahora esto no tiene funcionalidad 
-                <a
-                    type="button"
-                    class="btn btn-light btn-lg btn-block"
-                    href="products.html"
-                    >Ver productos</a
-                >
-                -->
             </div>
         </main>
 
@@ -201,10 +254,16 @@
             </div>
         </div>
 
+        <!-- SCRIPT -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/user-logged.js"></script>
         <script src="js/init.js"></script>
         <script src="js/product-info.js"></script>
+
+        <!-- MENU DESPLEGABLE -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </body>
 </html>

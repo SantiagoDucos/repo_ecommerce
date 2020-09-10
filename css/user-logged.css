@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/* OPCIONES DE USUARIO */
+.dropdown-toggle::after {
+    margin-top: 0.6rem;
+}
+
+#dropdownMenuButton {
+    display: flex;
+}

@@ -1,6 +1,29 @@
 @charset "UTF-8";
 
 #titulo-productos-relacionados {
-    margin-top: 5rem;
+    margin-top: 7rem;
     margin-bottom: 1.9rem;
 }
+
+#btn-enviar-calificacion {
+    width: 7rem;
+    height: 3rem;
+    margin-top: 1rem;
+}
+
+#div-estrellas {
+    width: 300px; 
+    padding: 0px;
+}
+
+#user-identifier {
+    color: white;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+#h3-califica-estrellas {
+    margin-top: 1.7rem;
+}
+
+
