@@ -2,6 +2,15 @@ var product = {};
 var comments = [];
 var products = [];
 
+// ESTA FUNCION MUESTRA EN PANTALLA EL PRODUCTO
+function showProduct(producto) {
+    console.log(producto);
+    document.getElementById("nombreDelProducto").innerHTML = producto.name;
+    document.getElementById("descripcionDelProducto").innerHTML = producto.description;
+    document.getElementById("precioDelProducto").innerHTML = `${producto.cost} ${producto.currency}`;
+    document.getElementById("cantidadDeVentas").innerHTML = producto.soldCount;
+}
+
 // ESTA FUNCION MUESTRA LOS PRODUCTOS EN PANTALLA
 function showRelatedProducts(allProducts, relatedProducts) {
     let htmlContentToAppend = "";
@@ -152,22 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (resultObj.status === "ok") {
             product = resultObj.data;
 
-            // TODO: CREAR UNA FUNCION SHOWPRODUCT
-            let nombreDelProducto = document.getElementById(
-                "nombreDelProducto"
-            );
-            let descripcionDelProducto = document.getElementById(
-                "descripcionDelProducto"
-            );
-            let precioDelProducto = document.getElementById(
-                "precioDelProducto"
-            );
-            let cantidadDeVentas = document.getElementById("cantidadDeVentas");
-
-            nombreDelProducto.innerHTML = product.name;
-            descripcionDelProducto.innerHTML = product.description;
-            precioDelProducto.innerHTML = `${product.cost} ${product.currency}`;
-            cantidadDeVentas.innerHTML = product.soldCount;
+            showProduct(product);            
 
             showImagesGallery(product.images);
         }
