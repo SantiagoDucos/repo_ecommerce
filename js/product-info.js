@@ -197,9 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("calificacion").style = "display: inline-block";
     }
 
-    document
-        .getElementById("btn-enviar-calificacion")
-        .addEventListener("click", function () {
+    document.getElementById("btn-enviar-calificacion").addEventListener("click", function () {
             // EXTRAEMOS EL COMENTARIO
             let elementoTextArea = document.getElementById("ta-comentario");
             let comentrario = elementoTextArea.value;
@@ -215,11 +213,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // EXTRAEMOS LA FECHA Y HORA
                 let dateTime = new Date();
                 let fechaHora = `
-            ${dateTime.getFullYear()}-${
-                    dateTime.getMonth() + 1
-                }-${dateTime.getDate()} 
-            ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}
-            `;
+                ${dateTime.getFullYear()}-
+                ${dateTime.getMonth() + 1}-
+                ${dateTime.getDate()} ${dateTime.getHours()}:
+                ${dateTime.getMinutes()}:
+                ${dateTime.getSeconds()}
+                `;
 
                 let elements = document.getElementsByName("rating");
 
@@ -244,9 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
 
-                document
-                    .getElementById("prueba")
-                    .scrollIntoView({ behavior: "smooth" });
+                // HACEMOS FOCO EN EL COMENTARIO
+                document.getElementById("prueba").scrollIntoView({ behavior: "smooth" });
             } else {
                 alert("Debe completar el comentario y la calificación");
             }
