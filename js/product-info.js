@@ -152,33 +152,30 @@ function getRating(radioBtn) {
     return score;
 }
 
-// CUANDO SE CARGUE LA PAGINA
 document.addEventListener("DOMContentLoaded", function () {
-    // SE VAN A EJECUTAR
-
-    // ESTO
+    
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             product = resultObj.data;
-
-            showProduct(product);            
-
-            showImagesGallery(product.images);
         }
     });
 
-    // Y ESTO
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             comments = resultObj.data;
-            comments = ordenarDesendenteComentariosPorFecha(comments);
-            showComments(comments);
         }
     });
 
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             products = resultObj.data;
+
+            showProduct(product);            
+            showImagesGallery(product.images);
+
+            comments = ordenarDesendenteComentariosPorFecha(comments);
+            showComments(comments);
+
             showRelatedProducts(products, product.relatedProducts);
         }
     });
@@ -186,61 +183,62 @@ document.addEventListener("DOMContentLoaded", function () {
     // SI HAY UN USUARIO LOGUEADO, MOSTRAMOS EL DIV DE COMENTARIO
     let userLogged = localStorage.getItem("user-logged");
     if (userLogged) {
-        // SI EXISTE LA INFO EN EL STORAGE
 
         document.getElementById("calificacion").style = "display: inline-block";
     }
 
-    document.getElementById("btn-enviar-calificacion").addEventListener("click", function () {
-            // EXTRAEMOS EL COMENTARIO
-            let elementoTextArea = document.getElementById("ta-comentario");
-            let comentrario = elementoTextArea.value;
+});
 
-            if (comentrario != "") {
-                comentarioParaAgregar = {};
+// CUANDO UN USUARIO AGREGE UN COMENTARIO
+document.getElementById("btn-enviar-calificacion").addEventListener("click", function () {
+    // EXTRAEMOS EL COMENTARIO
+    let elementoTextArea = document.getElementById("ta-comentario");
+    let comentrario = elementoTextArea.value;
 
-                // EXTRAEMOS EL NOMBRE DE USUARIO
-                let userLogged = localStorage.getItem("user-logged");
-                userLogged = JSON.parse(userLogged);
-                let email = userLogged.email;
+    if (comentrario != "") {
+        comentarioParaAgregar = {};
 
-                // EXTRAEMOS LA FECHA Y HORA
-                let dateTime = new Date();
-                let fechaHora = `
-                ${dateTime.getFullYear()}-
-                ${dateTime.getMonth() + 1}-
-                ${dateTime.getDate()} ${dateTime.getHours()}:
-                ${dateTime.getMinutes()}:
-                ${dateTime.getSeconds()}
-                `;
+        // EXTRAEMOS EL NOMBRE DE USUARIO
+        let userLogged = localStorage.getItem("user-logged");
+        userLogged = JSON.parse(userLogged);
+        let email = userLogged.email;
 
-                let elements = document.getElementsByName("rating");
+        // EXTRAEMOS LA FECHA Y HORA
+        let dateTime = new Date();
+        let fechaHora = `
+        ${dateTime.getFullYear()}-
+        ${dateTime.getMonth() + 1}-
+        ${dateTime.getDate()} ${dateTime.getHours()}:
+        ${dateTime.getMinutes()}:
+        ${dateTime.getSeconds()}
+        `;
 
-                // CREAMOS EL COMENTARIO
-                comentarioParaAgregar = {
-                    score: getRating(elements),
-                    description: comentrario,
-                    user: email,
-                    dateTime: fechaHora,
-                };
+        let elements = document.getElementsByName("rating");
 
-                // AGREGAMOS EL COMENTARIO A LAS OTROS COMENTARIOS
-                comments.unshift(comentarioParaAgregar);
+        // CREAMOS EL COMENTARIO
+        comentarioParaAgregar = {
+            score: getRating(elements),
+            description: comentrario,
+            user: email,
+            dateTime: fechaHora,
+        };
 
-                // MOSTRAMOS NUEVAMENTE LOS COMENTARIOS
-                showComments(comments);
+        // AGREGAMOS EL COMENTARIO A LAS OTROS COMENTARIOS
+        comments.unshift(comentarioParaAgregar);
 
-                elementoTextArea.value = "";
-                elements.forEach(function (radio) {
-                    if (radio.value == 5) {
-                        radio.checked = true;
-                    }
-                });
+        // MOSTRAMOS NUEVAMENTE LOS COMENTARIOS
+        showComments(comments);
 
-                // HACEMOS FOCO EN EL COMENTARIO
-                document.getElementById("prueba").scrollIntoView({ behavior: "smooth" });
-            } else {
-                alert("Debe completar el comentario y la calificación");
+        elementoTextArea.value = "";
+        elements.forEach(function (radio) {
+            if (radio.value == 5) {
+                radio.checked = true;
             }
         });
+
+        // HACEMOS FOCO EN EL COMENTARIO
+        document.getElementById("prueba").scrollIntoView({ behavior: "smooth" });
+    } else {
+        alert("Debe completar el comentario y la calificación");
+    }
 });
