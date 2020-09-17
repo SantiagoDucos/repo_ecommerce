@@ -29,9 +29,7 @@ function showRelatedProducts(allProducts, relatedProducts) {
         `;
     });
 
-    document.getElementById(
-        "div-productos-relacionados"
-    ).innerHTML = htmlContentToAppend;
+    document.getElementById("div-productos-relacionados").innerHTML = htmlContentToAppend;
 }
 
 // ESTA FUNCION MUESTRA LAS IMAGENES EN PANTALLA

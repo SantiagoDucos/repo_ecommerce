@@ -1,269 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>eMercado - Todo lo que busques está aquí</title>
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta name="description" content="" />
-
-        <link
-            rel="canonical"
-            href="https://getbootstrap.com/docs/4.3/examples/album/"
-        />
-        <link
-            href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-            rel="stylesheet"
-        />
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
-
-        <link rel="stylesheet" href="css/product-info.css" />   
-        <link rel="stylesheet" href="css/stars-to-rate.css">
-        <link rel="stylesheet" href="css/user-logged.css">
-    </head>
-
-    <body>
-        <!-- BARRA DE NAVEGACION -->
-        <nav class="site-header sticky-top py-1 bg-dark">
-            <div
-                class="container d-flex flex-column flex-md-row justify-content-between"
-            >
-                <a class="py-2 d-none d-md-inline-block" href="home.html"
-                    >Inicio</a
+<head>
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/product-info.css" />   
+    <link rel="stylesheet" href="css/stars-to-rate.css" />
+    <link rel="stylesheet" href="css/user-logged.css" />
+</head>
+<body>
+    <nav class="site-header sticky-top py-1 bg-dark">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
+            <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+            <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+            <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+            <div class="dropdown" id="user-container">
+                <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                 >
-                <a class="py-2 d-none d-md-inline-block" href="categories.html"
-                    >Categorías</a
+                    <p id="user-identifier"></p>
+                </button>
+                <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
                 >
-                <a class="py-2 d-none d-md-inline-block" href="products.html"
-                    >Productos</a
-                >
-                <a class="py-2 d-none d-md-inline-block" href="sell.html"
-                    >Vender</a
-                >
-                <a class="py-2 d-none d-md-inline-block" href="cart.html"
-                    >Mi carrito</a
-                >
-
-                <div class="dropdown" id="user-container" style="display: none;">
-                    <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        <p class="" id="user-identifier"></p>
-                    </button>
-                    <div
-                        class="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton"
-                    >
-                        <a class="dropdown-item" href="#">Ver perfil</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" id="sign-of"
-                            >Salir</a
-                        >
-                    </div>
+                    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+                    <a class="dropdown-item" href="cart.html">Ver carrito</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="sign-of">Salir</a>
                 </div>
-
-            </div>
-        </nav>
-
-        <!-- ACA SE VA A MOSTRAR LA INFORMACION DEL PRODUCTO SELECCIONADO-->
-        <main role="main">
-            <div class="container p-5">
-                <div class="text-center p-4">
-                    <h2>Descripción del producto</h2>
-
-                    <p class="lead">
-                        Encontrarás aquí toda la información del producto
-                        seleccionado.
-                    </p>
-
-                    <p class="small alert-warning py-3">
-                        <strong>Nota: </strong>por simplicidad, cualquiera sea
-                        el producto seleccionada previamente, siempre se
-                        visualizará el mismo:
-                        <strong>Chevrolet Onix Joy</strong>.
-                    </p>
-                </div>
-
-                <h3 id="nombreDelProducto"></h3>
-
-                <hr class="my-3" />
-                <div style="display: flex"></div>
-                <dl>
-                    <dt>Descripción</dt>
-                    <dd>
-                        <p id="descripcionDelProducto"></p>
-                    </dd>
-
-                    <dt>Precio</dt>
-                    <dd>
-                        <p id="precioDelProducto"></p>
-                    </dd>
-
-                    <dt>Ventas</dt>
-                    <dd>
-                        <p id="cantidadDeVentas"></p>
-                    </dd>
-
-                    <dt>Imágenes ilustrativas</dt>
-                    <dd>
-                        <div
-                            class="row text-center text-lg-left pt-2"
-                            id="imagenesDelProducto"
-                        ></div>
-                    </dd>
-
-                    <dt><h4 id="prueba">Comentarios y claificaciones</h4></dt>
-                    <dd>
-                        <p id="comentariosCalificaciones"></p>
-                    </dd>
-                </dl>
-
-                <div id="calificacion" style="display: none">
-                    <h3 style="margin-bottom: 1.6rem; margin-top: 7rem">
-                        ¿Compraste el produto? ¡Cuéntanos que te pareció!
-                    </h3>
-
-                    <textarea
-                        class="form-control"
-                        id="ta-comentario"
-                        cols="100"
-                        rows="4"
-                        placeholder="Escribe aquí!"
-                    ></textarea>
-
-                    <div>
-                        <h3 id="h3-califica-estrellas">
-                            Califica con estrellas!
-                        </h3>
-                        <!-- ESTRELLAS -->
-                        <div class="star-rating" id="div-estrellas">
-                            <input
-                                id="star-5"
-                                type="radio"
-                                name="rating"
-                                value="5"
-                                checked
-                            />
-                            <label for="star-5" title="5 stars">
-                                <i class="active fa fa-star"></i>
-                            </label>
-
-                            <input
-                                id="star-4"
-                                type="radio"
-                                name="rating"
-                                value="4"
-                            />
-                            <label for="star-4" title="4 stars">
-                                <i class="active fa fa-star"></i>
-                            </label>
-
-                            <input
-                                id="star-3"
-                                type="radio"
-                                name="rating"
-                                value="3"
-                            />
-                            <label for="star-3" title="3 stars">
-                                <i class="active fa fa-star"></i>
-                            </label>
-
-                            <input
-                                id="star-2"
-                                type="radio"
-                                name="rating"
-                                value="2"
-                            />
-                            <label for="star-2" title="2 stars">
-                                <i class="active fa fa-star"></i>
-                            </label>
-
-                            <input
-                                id="star-1"
-                                type="radio"
-                                name="rating"
-                                value="1"
-                            />
-                            <label for="star-1" title="1 star">
-                                <i class="active fa fa-star"></i>
-                            </label>
-                        </div>
-
-                        <!--<select
-                            class="custom-select d-block"
-                            id="slct-calificacion"
-                            style="width: 10rem"
-                        >
-                            <option value="0" selected>Califique aquí!</option>
-                            <option value="1">⭐</option>
-                            <option value="2">⭐⭐</option>
-                            <option value="3">⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
-                        </select>-->
-
-                        
-                    </div>
-
-                    <button class="btn btn-outline-primary" id="btn-enviar-calificacion">
-                        Enviar
-                    </button>
-
-                </div>
-
-                <h3 id="titulo-productos-relacionados">
-                    Productos relacionados
-                </h3>
-                <div id="div-productos-relacionados" class="row">
-                    <!-- ACÁ SE VAN A MOSTRAR LOS PRODUCTOS RELACIONADOS -->
-                </div>
-
-            </div>
-        </main>
-
-        <!-- COMENTARIO DE PLAN CEIBAL -->
-        <footer class="text-muted">
-            <div class="container">
-                <p class="float-right">
-                    <a href="#">Volver arriba</a>
-                </p>
-                <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-                <p>
-                    Clickea <a target="_blank" href="Letra.pdf">aquí</a> para
-                    descargar la letra del obligatorio.
-                </p>
-            </div>
-        </footer>
-
-        <div id="spinner-wrapper">
-            <div class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
             </div>
         </div>
-
-        <!-- SCRIPT -->
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/user-logged.js"></script>
-        <script src="js/init.js"></script>
-        <script src="js/product-info.js"></script>
-
-        <!-- MENU DESPLEGABLE -->
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </body>
+    </nav>
+    <main role="main">
+        <div class="container p-5">
+            <div class="text-center p-4">
+                <h2>Descripción del producto</h2>
+                <p class="lead">
+                    Encontrarás aquí toda la información del producto
+                    seleccionado.
+                </p>
+                <p class="small alert-warning py-3">
+                    <strong>Nota: </strong>por simplicidad, cualquiera sea el producto seleccionada previamente, siempre 
+                    se visualizará el mismo: <strong>Chevrolet Onix Joy</strong>.
+                </p>
+            </div>
+            <h3 id="nombreDelProducto"></h3>
+            <hr class="my-3" />
+            <div style="display: flex"></div>
+            <dl>
+                <dt>Descripción</dt>
+                <dd>
+                    <p id="descripcionDelProducto"></p>
+                </dd>
+                <dt>Precio</dt>
+                <dd>
+                    <p id="precioDelProducto"></p>
+                </dd>
+                <dt>Ventas</dt>
+                <dd>
+                    <p id="cantidadDeVentas"></p>
+                </dd>
+                <dt>Imágenes ilustrativas</dt>
+                <dd>
+                    <div
+                        class="row text-center text-lg-left pt-2"
+                        id="imagenesDelProducto"
+                    ></div>
+                </dd>
+                <dt><h4 id="prueba">Comentarios y claificaciones</h4></dt>
+                <dd>
+                    <p id="comentariosCalificaciones"></p>
+                </dd>
+            </dl>
+            <div id="calificacion">
+                <h3 style="margin-bottom: 1.6rem; margin-top: 7rem">
+                    ¿Compraste el produto? ¡Cuéntanos que te pareció!
+                </h3>
+                <textarea
+                    class="form-control"
+                    id="ta-comentario"
+                    cols="100"
+                    rows="4"
+                    placeholder="Escribe aquí!"
+                ></textarea>
+                <div>
+                    <h3 id="h3-califica-estrellas">
+                        Califica con estrellas!
+                    </h3>
+                    <div class="star-rating" id="div-estrellas">
+                        <input id="star-5" type="radio" name="rating" value="5" checked />
+                        <label for="star-5" title="5 stars">
+                            <i class="active fa fa-star"></i>
+                        </label>
+                        <input
+                            id="star-4" type="radio" name="rating" value="4" />
+                        <label for="star-4" title="4 stars">
+                            <i class="active fa fa-star"></i>
+                        </label>
+                        <input id="star-3" type="radio" name="rating" value="3" />
+                        <label for="star-3" title="3 stars">
+                            <i class="active fa fa-star"></i>
+                        </label>
+                        <input id="star-2" type="radio" name="rating" value="2" />
+                        <label for="star-2" title="2 stars">
+                            <i class="active fa fa-star"></i>
+                        </label>
+                        <input id="star-1" type="radio" name="rating" value="1" />
+                        <label for="star-1" title="1 star">
+                            <i class="active fa fa-star"></i>
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary" id="btn-enviar-calificacion">Enviar</button>
+            </div>
+            <h3 id="titulo-productos-relacionados">
+                Productos relacionados
+            </h3>
+            <div id="div-productos-relacionados" class="row"></div>
+        </div>
+    </main>
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right"><a href="#">Volver arriba</a></p>
+            <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+            <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+        </div>
+    </footer>
+    <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/user-logged.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/product-info.js"></script>
+</body>
 </html>

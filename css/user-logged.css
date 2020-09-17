@@ -8,3 +8,11 @@
 #dropdownMenuButton {
     display: flex;
 }
+
+#user-identifier {
+    margin-bottom: 0px;
+}
+
+#user-container {
+    display: none;
+}

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#buscadorTexto{
+    width: 180px; 
+    margin-right: 30px;
+}
+
+#input-search-word {
+    margin-right: 15px;
+    width: 9rem;
+}
+
+#p-buscador {
+    width: 80px; 
+    margin-right: 30px;
+}
+
+#div-palabraRelacionada {
+    margin-top: 1rem;;
+}
