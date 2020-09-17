@@ -29,3 +29,9 @@
 #calificacion {
     display: none;
 }
+
+#carruselDeFotos {
+    padding-right: 30rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}

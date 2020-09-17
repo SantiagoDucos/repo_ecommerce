@@ -4,7 +4,6 @@ var products = [];
 
 // ESTA FUNCION MUESTRA EN PANTALLA EL PRODUCTO
 function showProduct(producto) {
-    console.log(producto);
     document.getElementById("nombreDelProducto").innerHTML = producto.name;
     document.getElementById("descripcionDelProducto").innerHTML = producto.description;
     document.getElementById("precioDelProducto").innerHTML = `${producto.cost} ${producto.currency}`;
@@ -14,7 +13,6 @@ function showProduct(producto) {
 // ESTA FUNCION MUESTRA LOS PRODUCTOS EN PANTALLA
 function showRelatedProducts(allProducts, relatedProducts) {
     let htmlContentToAppend = "";
-
     relatedProducts.forEach(function (indice) {
         htmlContentToAppend += `
         <div class="col-md-4">
@@ -28,39 +26,23 @@ function showRelatedProducts(allProducts, relatedProducts) {
         </div>
         `;
     });
-
     document.getElementById("div-productos-relacionados").innerHTML = htmlContentToAppend;
 }
 
 // ESTA FUNCION MUESTRA LAS IMAGENES EN PANTALLA
 function showImagesGallery(imagenesArray) {
-    let htmlContentToAppend = "";
-
     for (let i = 0; i < imagenesArray.length; i++) {
         let imageSrc = imagenesArray[i];
-
-        htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="${imageSrc}" alt="Imagen producto ${i}">
-            </div>
-        </div>
-        `;
-
-        document.getElementById(
-            "imagenesDelProducto"
-        ).innerHTML = htmlContentToAppend;
+        document.getElementById('img' + i).src = imageSrc;
     }
 }
 
 // ESTA FUNCION ORDENA LOS COMENTARIOS POR FECHA, DE FORMA DECENDETE
 function ordenarDesendenteComentariosPorFecha(comentariosArray) {
     let result = [];
-
     result = comentariosArray.sort(function (a, b) {
         let fecha1 = new Date(a.dateTime);
         let fecha2 = new Date(b.dateTime);
-
         if (fecha1 > fecha2) {
             return -1;
         }
@@ -69,14 +51,12 @@ function ordenarDesendenteComentariosPorFecha(comentariosArray) {
         }
         return 0;
     });
-
     return result;
 }
 
 // ESTA FUNCION MUESTRA EN PANTALLA LOS COMENTARIOS
 function showComments(comentariosArray) {
     let htmlContentToAppend = "";
-
     let meses = [
         "Enero",
         "Febrero",
@@ -91,7 +71,6 @@ function showComments(comentariosArray) {
         "Noviembre",
         "Diciembre",
     ];
-
     let diasSemana = [
         "Domingo",
         "Lunes",
@@ -101,41 +80,31 @@ function showComments(comentariosArray) {
         "Viernes",
         "Sábado",
     ];
-
     for (let i = 0; i < comentariosArray.length; i++) {
         let comentario = comentariosArray[i];
 
         let fecha = new Date(comentario.dateTime);
-
         let fechaString = `
-        ${diasSemana[fecha.getDay()]}, ${fecha.getDate()} de  ${
-            meses[fecha.getMonth()]
-        } de ${fecha.getFullYear()}
+        ${diasSemana[fecha.getDay()]}, ${fecha.getDate()} de  ${meses[fecha.getMonth()]} de ${fecha.getFullYear()}
         `;
 
         htmlContentToAppend += `
         <br>
         <p><strong>${comentario.user}</strong> &nbsp`;
-
         for (let i = 1; i <= comentario.score; i++) {
             htmlContentToAppend += '<span class="fa fa-star checked"></span>';
         }
-
         for (let i = comentario.score + 1; i <= 5; i++) {
             htmlContentToAppend += '<span class="fa fa-star"></span>';
         }
-
-        htmlContentToAppend += `</p><div style="display: flex;">
-            
+        htmlContentToAppend += `
+        </p><div style="display: flex;">    
             <p>${comentario.description}. &nbsp <p style="color: gray; font-size: 0.9rem;">${fechaString}</p></p> 
-
         </div>
         <hr />
         `;
 
-        document.getElementById(
-            "comentariosCalificaciones"
-        ).innerHTML = htmlContentToAppend;
+        document.getElementById("comentariosCalificaciones").innerHTML = htmlContentToAppend;
     }
 }
 
@@ -178,30 +147,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // SI HAY UN USUARIO LOGUEADO, MOSTRAMOS EL DIV DE COMENTARIO
+    // usuario logueado -> escribir comentario
     let userLogged = localStorage.getItem("user-logged");
     if (userLogged) {
-
         document.getElementById("calificacion").style = "display: inline-block";
     }
-
 });
 
 // CUANDO UN USUARIO AGREGE UN COMENTARIO
 document.getElementById("btn-enviar-calificacion").addEventListener("click", function () {
-    // EXTRAEMOS EL COMENTARIO
     let elementoTextArea = document.getElementById("ta-comentario");
     let comentrario = elementoTextArea.value;
 
     if (comentrario != "") {
         comentarioParaAgregar = {};
 
-        // EXTRAEMOS EL NOMBRE DE USUARIO
         let userLogged = localStorage.getItem("user-logged");
         userLogged = JSON.parse(userLogged);
         let email = userLogged.email;
 
-        // EXTRAEMOS LA FECHA Y HORA
         let dateTime = new Date();
         let fechaHora = `
         ${dateTime.getFullYear()}-
@@ -213,7 +177,6 @@ document.getElementById("btn-enviar-calificacion").addEventListener("click", fun
 
         let elements = document.getElementsByName("rating");
 
-        // CREAMOS EL COMENTARIO
         comentarioParaAgregar = {
             score: getRating(elements),
             description: comentrario,
@@ -221,10 +184,8 @@ document.getElementById("btn-enviar-calificacion").addEventListener("click", fun
             dateTime: fechaHora,
         };
 
-        // AGREGAMOS EL COMENTARIO A LAS OTROS COMENTARIOS
         comments.unshift(comentarioParaAgregar);
 
-        // MOSTRAMOS NUEVAMENTE LOS COMENTARIOS
         showComments(comments);
 
         elementoTextArea.value = "";
@@ -234,7 +195,6 @@ document.getElementById("btn-enviar-calificacion").addEventListener("click", fun
             }
         });
 
-        // HACEMOS FOCO EN EL COMENTARIO
         document.getElementById("prueba").scrollIntoView({ behavior: "smooth" });
     } else {
         alert("Debe completar el comentario y la calificación");
