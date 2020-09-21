@@ -2,15 +2,9 @@ var product = {};
 var comments = [];
 var products = [];
 
-// ESTA FUNCION MUESTRA EN PANTALLA EL PRODUCTO
-function showProduct(producto) {
-    document.getElementById("nombreDelProducto").innerHTML = producto.name;
-    document.getElementById("descripcionDelProducto").innerHTML = producto.description;
-    document.getElementById("precioDelProducto").innerHTML = `${producto.cost} ${producto.currency}`;
-    document.getElementById("cantidadDeVentas").innerHTML = producto.soldCount;
-}
 
-// ESTA FUNCION MUESTRA LOS PRODUCTOS EN PANTALLA
+
+// ESTA FUNCION MUESTRA LOS PRODUCTOS RELACIONADOS EN PANTALLA
 function showRelatedProducts(allProducts, relatedProducts) {
     let htmlContentToAppend = "";
     relatedProducts.forEach(function (indice) {
@@ -108,6 +102,25 @@ function showComments(comentariosArray) {
     }
 }
 
+// ESTA FUNCION MUESTRA EN PANTALLA EL PRODUCTO
+function showProduct(producto) {
+    try {
+        document.getElementById("nombreDelProducto").innerHTML = producto.name;
+        document.getElementById("descripcionDelProducto").innerHTML = producto.description;
+        document.getElementById("precioDelProducto").innerHTML = `${producto.cost} ${producto.currency}`;
+        document.getElementById("cantidadDeVentas").innerHTML = producto.soldCount;
+
+        showImagesGallery(product.images);
+
+        comments = ordenarDesendenteComentariosPorFecha(comments);
+            showComments(comments);
+    } catch (e) {
+        alert("Ocurrió un error, se recargará la pagina");
+        location.reload();
+    }
+        
+}
+
 // ESTA FUNCION CUENTA LA CANTIDAD DE ENTRELLAS QUE SELECCIONÓ EL CLIENTE
 function getRating(radioBtn) {
     let score = 0;
@@ -120,6 +133,7 @@ function getRating(radioBtn) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    
     
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -136,16 +150,11 @@ document.addEventListener("DOMContentLoaded", function () {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             products = resultObj.data;
-
-            showProduct(product);            
-            showImagesGallery(product.images);
-
-            comments = ordenarDesendenteComentariosPorFecha(comments);
-            showComments(comments);
-
+            showProduct(product);
             showRelatedProducts(products, product.relatedProducts);
         }
     });
+    
 
     // usuario logueado -> escribir comentario
     let userLogged = localStorage.getItem("user-logged");
