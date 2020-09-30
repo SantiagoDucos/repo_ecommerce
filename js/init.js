@@ -22,6 +22,9 @@ const CART_INFO_URL =
 const CART_BUY_URL =
     "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
+const CART_INFO_URL2 =
+    "https://japdevdep.github.io/ecommerce-api/cart/654.json";
+
 var showSpinner = function () {
     document.getElementById("spinner-wrapper").style.display = "block";
 };

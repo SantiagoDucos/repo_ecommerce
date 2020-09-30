@@ -31,10 +31,7 @@
                 >
                     <p id="user-identifier"></p>
                 </button>
-                <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                >
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
                     <a class="dropdown-item" href="cart.html">Ver carrito</a>
                     <div class="dropdown-divider"></div>
@@ -44,21 +41,91 @@
         </div>
     </nav>
     <div class="container p-5">
-        <div
-            class="alert alert-danger"
-            role="alert"
-            style="position: relative; width: auto; top: 0"
-        >
-            <h4 class="alert-heading">¡A trabajar! :)</h4>
-            <p>
-                Esta sección corresponde a: Entrega 5 (Fecha de entrega:
-                11/10/2020) y Entrega 6 (Fecha de entrega: 25/10/2020).
-            </p>
-            <hr />
-            <p class="mb-0">
-                Para saber qué debes hacer, fijate en la actividad en CREA
-                correspondiente a esta entrega.
-            </p>
+        <h2>Carrito</h2>
+        <table class="table table-hover">
+            <thead>
+                <th>Producto</th>
+                <th>Imagen</th>
+                <th>Precio unitario</th>
+                <th>Cantidad</th>
+                <th>Costo (UYU)</th>
+            </thead>
+            <tbody id="productos-carro">
+                <!--productos-->
+            </tbody>
+            <tfoot>
+                <td colspan="4" id="costoTotal-txt"><strong>Costo total</strong></td>
+                <td><span id="costo-total"></span></td>
+            </tfoot>
+        </table>
+        <h2 class="envio">Envío</h2>
+        <hr>
+        <div class="form-check">
+            <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="exampleRadios2" value="rapido">
+            <label class="form-check-label" for="exampleRadios2">
+                Envio rapido
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="exampleRadios3" value="normal">
+            <label class="form-check-label" for="exampleRadios3">
+                Envio normal
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="exampleRadios1" value="retiro" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                Retiro en local
+            </label>
+        </div>
+
+        <h2 class="envio">Costo Final</h2>
+        <hr>
+        <span id="costoFinal"></span><br>
+        <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+            Comprar
+        </button>     
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ingrese sus datos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Cedula">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Retiro en local</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Departamento</label>
+                        <select class="form-control">
+                            <option>Montevideo</option>
+                            <option>Colonia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Dirección">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Finalizar compra</button>
+                </div>
+            </div>
         </div>
     </div>
     <div id="spinner-wrapper">

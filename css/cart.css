@@ -14,3 +14,24 @@
         font-size: 3.5rem;
     }
 }
+
+img.prod {
+    height: 100px;
+    width: 100px;
+}
+
+h2.envio {
+    margin-top: 5rem;
+}
+
+#costoFinal {
+    font-size: 100px;
+}
+
+#costoTotal-txt {
+    font-size: 20px;
+}
+
+#costo-total {
+    font-size: 25px;
+}
