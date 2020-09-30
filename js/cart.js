@@ -1,5 +1,12 @@
 var carrito = [];
 
+function eliminarArticulo(indice) {
+    if (carrito.length > 0) {
+        carrito.splice(indice, 1);
+        mostrarProductosCarrito(carrito);
+    }
+}
+
 function calcularPrecioUnitarioSegunMondeda(precioUnitario, moneda) {
     let precioEnPesos = 0;
     if (moneda == 'USD') {
@@ -25,9 +32,6 @@ function calcularEnvio() {
     }
 
     switch (tipoDeEnvio) {
-        case 'retiro':
-            precioFinal = costoTotal;
-            break;
         case 'rapido':
             extraEnvio = 0.08 * costoTotal;
             precioFinal = costoTotal + extraEnvio;
@@ -39,7 +43,7 @@ function calcularEnvio() {
         default:
             alert("Ocurrió un error");
     }
-    return precioFinal;
+    return '$ ' + precioFinal;
 }
 
 function calcularPrecioTotal() {
@@ -61,39 +65,45 @@ function calcularPrecioProducto(precioUnitario, moneda, i) {
 }
 
 function mostrarProductosCarrito(prodArray) {
-    let contenidoHtml = '';
-    for (let i = 0; i < prodArray.length; i++) {
-        let producto = prodArray[i];
-        let precio = calcularPrecioUnitarioSegunMondeda(producto.unitCost, producto.currency) * producto.count;
-        contenidoHtml += `
-            <tr>
-                <td>${producto.name}</td>
-                <td><img class="prod" src="${producto.src}" alt="${producto.name}"></td>
-                <td>${producto.unitCost} ${producto.currency}</td>
-                <td>
-                    <input
-                        id="cantidad-${i}"
-                        type="number"
-                        value="${producto.count}" 
-                        min="1" 
-                        onchange="calcularPrecioProducto(${producto.unitCost}, '${producto.currency}', ${i})"
-                    >
-                </td>
-                <td><span class="precio" id="precio-${i}">${precio}</span></td>
-            </tr>
+    if (prodArray.length != 0) {
+        let contenidoHtml = '';
+        prodArray.forEach(function (producto, indice) {
+            let precio = calcularPrecioUnitarioSegunMondeda(producto.unitCost, producto.currency) * producto.count;
+            contenidoHtml += `
+                <tr>
+                    <td>${producto.name}</td>
+                    <td><img class="prod" src="${producto.src}" alt="${producto.name}"></td>
+                    <td>${producto.unitCost} ${producto.currency}</td>
+                    <td>
+                        <input
+                            id="cantidad-${indice}"
+                            type="number"
+                            value="${producto.count}" 
+                            min="1" 
+                            onchange="calcularPrecioProducto(${producto.unitCost}, '${producto.currency}', ${indice})"
+                        >
+                    </td>
+                    <td><span class="precio" id="precio-${indice}">${precio}</span></td>
+                    <td><button class="btn btn-danger" onclick="eliminarArticulo(${indice});">Eliminar</button></td>
+                </tr>
+            `;
+        });
+        document.getElementById('productos-carro').innerHTML = contenidoHtml;
+        calcularPrecioTotal()
+        document.getElementById('costoFinal').innerHTML = calcularEnvio();
+    } else {
+        console.log("entre");
+        document.getElementById('contenedor').innerHTML = `
+            <h2>No hay ningun articulo en el carrito</h2>
         `;
     }
-    document.getElementById('productos-carro').innerHTML = contenidoHtml;
-    calcularPrecioTotal()
-    document.getElementById('costoFinal').innerHTML = calcularEnvio();
 }
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(CART_INFO_URL2).then(function (resultObj) {
         if (resultObj.status === "ok") {
-            carrito = resultObj.data;
-            mostrarProductosCarrito(carrito.articles);
+            carrito = resultObj.data.articles;
+            mostrarProductosCarrito(carrito);
             calcularEnvio();
         }
     });
