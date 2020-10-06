@@ -1,3 +1,14 @@
+function isLogged(from) {
+    let userLogged = localStorage.getItem('user-logged');
+    if (!userLogged) {
+        localStorage.setItem('login-need', JSON.stringify({
+            from: from,
+            msg: 'Para poder acceder a este sitio necesitas loguearte'
+        }));
+        window.location = 'login.html';
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function (e) {
 
     // EXTRAEMOS LA INFORMACION DEL STORAGE

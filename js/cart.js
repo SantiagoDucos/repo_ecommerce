@@ -99,7 +99,14 @@ function mostrarProductosCarrito(prodArray) {
     }
 }
 
+function ok() {
+    location.href="home.html";
+}
+
 document.addEventListener("DOMContentLoaded", function (e) {
+
+    isLogged('cart.html');
+
     getJSONData(CART_INFO_URL2).then(function (resultObj) {
         if (resultObj.status === "ok") {
             carrito = resultObj.data.articles;

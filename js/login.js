@@ -1,28 +1,38 @@
-// CUANDO TERMINE DE CARGARSE EL DOM
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", function (e) {
 
-    // SE CREAR UN EVENTO, QUE ESCUCHA AL BOTÓN DE INGRESAR 
+    let loginNeed = localStorage.getItem('login-need');
+    if (loginNeed) {
+        loginNeed = JSON.parse(loginNeed);
+        document.getElementById('alert').innerHTML = `
+            <div class="alert alert-danger alert-dismissible fade show" id="mensaje" role="alert">
+                <span id="msg">${loginNeed.msg}</span>
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+        `;
+    }
+
     document.getElementById("buttonIngresoLogin").addEventListener("click", function (e) {
 
-    // EXTRAEMOS LOS DATOS
-    let inputEmail = document.getElementById("inputEmailLogin");
-    let inputPassword = document.getElementById("inputPasswordLogin");
-        
-    // VERIFICAMO QUE LOS CAMPOS ESTÉN COMPLETOS
-    let camposCompletos = true;
-    if (inputEmail.value === '' || inputPassword.value === ''){
-        camposCompletos = false;
-        alert("Debes ingresar tus datos para continuar.");
-    }
+        let inputEmail = document.getElementById("inputEmailLogin");
+        let inputPassword = document.getElementById("inputPasswordLogin");
 
-        if (camposCompletos) { // SI LOS DATOS ESTÁN COMPLETOS
-        // GUARDAMOS EN EL STORAGE LA INFORMACION INGRESADA
-        localStorage.setItem('user-logged', JSON.stringify({ email: inputEmail.value }));
-        window.location = 'home.html';
-    }
+        let camposCompletos = true;
+        if (inputEmail.value === '' || inputPassword.value === '') {
+            camposCompletos = false;
+            alert("Debes ingresar tus datos para continuar.");
+        }
 
-  });
-
+        if (camposCompletos) {
+            localStorage.setItem('user-logged', JSON.stringify({
+                email: inputEmail.value
+            }));
+            if (loginNeed) {
+                localStorage.removeItem('login-need');
+                window.location = loginNeed.from;
+            } else {
+                window.location = 'home.html';
+            }
+            
+        }
+    });
 });
-
-
