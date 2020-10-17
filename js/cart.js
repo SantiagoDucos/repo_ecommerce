@@ -32,12 +32,16 @@ function calcularEnvio() {
     }
 
     switch (tipoDeEnvio) {
-        case 'rapido':
-            extraEnvio = 0.08 * costoTotal;
+        case 'premium':
+            extraEnvio = 0.15 * costoTotal;
             precioFinal = costoTotal + extraEnvio;
             break;
-        case 'normal':
-            extraEnvio = 0.04 * costoTotal;
+        case 'express':
+            extraEnvio = 0.07 * costoTotal;
+            precioFinal = costoTotal + extraEnvio;
+            break;
+        case 'standard':
+            extraEnvio = 0.05 * costoTotal;
             precioFinal = costoTotal + extraEnvio;
             break;
         default:
@@ -100,7 +104,7 @@ function mostrarProductosCarrito(prodArray) {
 }
 
 function ok() {
-    location.href="home.html";
+    location.href = "home.html";
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -117,8 +121,68 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     let radios = document.getElementsByName('radio-envio');
     for (let i = 0; i < radios.length; i++) {
-        radios[i].addEventListener('change', function() {
+        radios[i].addEventListener('change', function () {
             document.getElementById('costoFinal').innerHTML = calcularEnvio();
         });
+    }
+});
+
+document.getElementById('formaDePago').addEventListener('change', function () {
+
+    let metodoPago = document.getElementById('formaDePago').value;
+    let div = document.getElementById('div-formaDePago');
+    let elementosTarjeta = document.getElementsByClassName('tarjeta');
+    let elementosTransferencia = document.getElementsByClassName('transferencia');
+
+    if (metodoPago == 'transferencia') {
+        div.innerHTML = `
+            <div id="transferencia">
+                <div class="form-group">
+                    <select class="form-control transferencia" required>
+                        <option>BROU</option>
+                        <option>Santander</option>
+                        <option>Itau</option>
+                        <option>BBVA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control tarjeta" placeholder="Nombre del titular" required>
+                    <div class="invalid-feedback">
+                        Ingrese el nombre del titular por favor
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control tarjeta" placeholder="Número de cuenta" pattern="[0-9]+" required>
+                    <div class="invalid-feedback">
+                        Ingrese el número por favor
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (metodoPago == 'tarjeta') {
+        div.innerHTML = `
+            <div id="tarjeta">
+                <div class="form-group">
+                    <input type="text" class="form-control tarjeta"
+                        placeholder="Numero de tarjeta (sin espacios)" pattern="[0-9]{16}" required>
+                    <div class="invalid-feedback">
+                        Ingrese su numero de tarjeta por favor
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control tarjeta" placeholder="Vencimiento (MM/YYYY)"
+                        pattern="[0-9]{2}/[0-9]{4}" required>
+                    <div class="invalid-feedback">
+                        Ingrese el vencimiento de su tarjeta por favor
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control tarjeta" placeholder="Código de seguridad" required>
+                    <div class="invalid-feedback">
+                        Ingrese el codigo de seguridad de su tarjeta por favor
+                    </div>
+                </div>
+            </div>
+        `;
     }
 });
