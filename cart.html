@@ -39,7 +39,6 @@
     </nav>
 
     <div class="container p-5" id="contenedor">
-
         <!-- carrito -->
         <div>
             <h2>Carrito</h2>
@@ -55,63 +54,78 @@
                     <!--productos-->
                 </tbody>
                 <tfoot>
-                    <td colspan="4" id="costoTotal-txt"><strong>Costo total</strong></td>
+                    <td colspan="4" id="costoTotal-txt">
+                        <strong>Costo total</strong>
+                    </td>
                     <td><span id="costo-total"></span></td>
                 </tfoot>
             </table>
         </div>
 
-        <!-- envio -->
         <div>
+            <!-- tipo de envío -->
             <h2 class="envio">Envío</h2>
-            <hr>
+            <hr />
             <div class="form-check">
                 <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="premium" value="premium"
-                    checked>
+                    checked />
                 <label class="form-check-label" for="premium">
                     Premium (2-5 días)
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="express" value="express"
-                    checked>
+                    checked />
                 <label class="form-check-label" for="express">
                     Express (5-8 días)
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="standard"
-                    value="standard" checked>
+                    value="standard" checked />
                 <label class="form-check-label" for="standard">
                     Standard (12-15 días)
                 </label>
             </div>
-            <!--
-            <div class="form-check">
-                <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="exampleRadios2"
-                    value="rapido" checked>
-                <label class="form-check-label" for="exampleRadios2">
-                    Envio rapido
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input envio-radio" type="radio" name="radio-envio" id="exampleRadios3"
-                    value="normal">
-                <label class="form-check-label" for="exampleRadios3">
-                    Envio normal
-                </label>
-            </div>
-            -->
-        </div>
 
-        <!-- comprar -->
-        <div>
-            <h2 class="envio">Costo Final</h2>
+            <!-- datos envio -->
+            <h2 class="envio">Datos para el envío</h2>
             <hr>
-            <span id="costoFinal"></span><br>
-            <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">
-                Comprar
-            </button>
+            <form class="needs-validation" id="form-datosEnvio" novalidate>
+                <div class="form-group">
+                    <select class="form-control" id="pais" required>
+                        <option>Uruguay</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="calle" placeholder="Calle" required/>
+                    <div class="invalid-feedback">
+                        Ingrese su calle por favor
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="numero" placeholder="Numero" required/>
+                    <div class="invalid-feedback">
+                        Ingrese su número por favor
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="esquina" placeholder="Esquina" required/>
+                    <div class="invalid-feedback">
+                        Ingrese su esquina por favor
+                    </div>
+                </div>
+            </form>
+
+            <!-- comprar -->
+            <div>
+                <h2 class="envio">Costo Final</h2>
+                <hr />
+                <span id="costoFinal"></span><br />
+                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                    Comprar
+                </button>
+            </div>
         </div>
     </div>
 
@@ -122,88 +136,53 @@
             <div class="modal-content">
                 <div id="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Ingrese sus datos</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">
+                            Ingrese sus datos
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body">
                         <form class="needs-validation" action="index.html" novalidate id="form-finalizar">
-                            <div>
-                                <h4>Datos del socio:</h4>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="cedula" placeholder="Cédula" required>
-                                    <div class="invalid-feedback">
-                                        Ingrese su cédula por favor
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Email" required>
-                                    <div class="invalid-feedback">
-                                        Ingrese su email por favor
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <h4>Datos para el envío:</h4>
-                            <div class="form-group">
-                                <select class="form-control" id="departamento" required>
-                                    <option>Montevideo</option>
-                                    <option>Artigas</option>
-                                    <option>Canelones</option>
-                                    <option>Cerro Largo</option>
-                                    <option>Colonia</option>
-                                    <option>Durazono</option>
-                                    <option>Flores</option>
-                                    <option>Florida</option>
-                                    <option>Lavalleja</option>
-                                    <option>Maldonado</option>
-                                    <option>Paysandú</option>
-                                    <option>Río Negro</option>
-                                    <option>Rivera</option>
-                                    <option>Rocha</option>
-                                    <option>Salto</option>
-                                    <option>San José</option>
-                                    <option>Soriano</option>
-                                    <option>Tacuarembó</option>
-                                    <option>Treinta y Tres</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="direccion" placeholder="Dirección" required>
-                                <div class="invalid-feedback">
-                                    Ingrese su dirección por favor
-                                </div>
-                            </div>
-                            <hr>
+                            <div id="mensaje"></div>
                             <h4>Modo de pago:</h4>
                             <div class="form-group">
                                 <select id="formaDePago" class="form-control" required>
-                                    <option value="tarjeta" selected>Tarjeta</option>
-                                    <option value="transferencia">Transferencia bancaria</option>
+                                    <option value="tarjeta" selected>
+                                        Tarjeta
+                                    </option>
+                                    <option value="transferencia">
+                                        Transferencia bancaria
+                                    </option>
                                 </select>
                             </div>
                             <div id="div-formaDePago">
                                 <div id="tarjeta">
                                     <div class="form-group">
                                         <input type="text" class="form-control tarjeta"
-                                            placeholder="Numero de tarjeta (sin espacios)" pattern="[0-9]{16}" required>
+                                            placeholder="Numero de tarjeta (sin espacios)" pattern="[0-9]{16}"
+                                            required />
                                         <div class="invalid-feedback">
-                                            Ingrese su numero de tarjeta por favor
+                                            Ingrese su numero de tarjeta por
+                                            favor
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control tarjeta"
-                                            placeholder="Vencimiento (MM/YYYY)" pattern="[0-9]{2}/[0-9]{4}" required>
+                                            placeholder="Vencimiento (MM/YYYY)" pattern="[0-9]{2}/[0-9]{4}" required />
                                         <div class="invalid-feedback">
-                                            Ingrese el vencimiento de su tarjeta por favor
+                                            Ingrese el vencimiento de su
+                                            tarjeta por favor
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control tarjeta"
-                                            placeholder="Código de seguridad" required>
+                                            placeholder="Código de seguridad" required />
                                         <div class="invalid-feedback">
-                                            Ingrese el codigo de seguridad de su tarjeta por favor
+                                            Ingrese el codigo de seguridad
+                                            de su tarjeta por favor
                                         </div>
                                     </div>
                                 </div>
@@ -235,39 +214,67 @@
     <!-- modal js -->
     <script>
         (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        } else {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            let data = {
-                                cedula: document.getElementById('cedula').value,
-                                email: document.getElementById('email').value,
-                                departamento: document.getElementById('departamento')
-                                    .value,
-                                direccion: document.getElementById('direccion').value
+            "use strict";
+            window.addEventListener(
+                "load",
+                function () {
+                    var forms = document.getElementsByClassName("needs-validation");
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener("submit", function (event) {
+                            if (form.checkValidity() === false) {
+                                console.log('no entre');
+                                event.preventDefault();
+                                event.stopPropagation();
+                            } else {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                console.log('entre');
+
+                                let pais = document.getElementById("pais").value;
+                                let calle = document.getElementById("calle").value;
+                                let numero = document.getElementById("numero").value;
+                                let esquina = document.getElementById("esquina").value;
+
+                                document.getElementById("form-datosEnvio").className = 'was-validated';
+
+                                if (pais != '' && calle != '' && numero != '' && esquina !='') {
+                                    let data = {
+                                        pais: pais,
+                                        calle: calle,
+                                        numero: numero,
+                                        esquina: esquina
+                                    };
+                                    document.getElementById("modal-content").innerHTML = `
+                                        <div class="alert alert-success show" role="alert">
+                                            <button class="close" onclick="ok()">&times;</button>
+                                            <span>La compra fue realizada con exito!</span>
+                                            <p>
+                                                Los articulos seran enviados al pais ${data.pais} en la dirección ${data.calle}
+                                                ${data.numero} esquina ${data.esquina}.
+                                            </p>
+                                        </div>
+                                    `;
+
+                                } else {
+                                    document.getElementById("mensaje").innerHTML = `
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Faltó una cosa</strong>
+                                            <p>
+                                                Debe ingresar sus datos de envio para completar la compra.
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    `;
+                                }
                             }
-                            document.getElementById('modal-content').innerHTML = `
-                                    <div class="alert alert-success show" role="alert">
-                                        <button class="close" onclick="ok()">&times;</button>
-                                        <span>La compra fue realizada con exito!</span>
-                                        <p>
-                                            Los articulos seran enviados la dirección ${data.direccion} 
-                                            en el departameto de ${data.direccion}.
-                                        </p>
-                                    </div>
-                                `;
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
+                            form.classList.add("was-validated");
+                        }, false);
+                    });
+                },
+                false
+            );
         })();
     </script>
 
