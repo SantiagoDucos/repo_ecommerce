@@ -104,63 +104,68 @@ function mostrarProductosCarrito(prodArray) {
 }
 
 function ok() {
-    location.href = "home.html";
+    let pais = document.getElementById("pais").value;
+    let calle = document.getElementById("calle").value;
+    let numero = document.getElementById("numero").value;
+    let esquina = document.getElementById("esquina").value;
+
+    if (pais != '' && calle != '' && numero != '' && esquina != '') {
+        location.href = "home.html";
+    }
 }
 
-document.addEventListener("DOMContentLoaded", function (e) {
+    document.addEventListener("DOMContentLoaded", function (e) {
 
-    isLogged('cart.html');
+        isLogged('cart.html');
 
-    getJSONData(CART_INFO_URL2).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            carrito = resultObj.data.articles;
-            mostrarProductosCarrito(carrito);
-            calcularEnvio();
+        getJSONData(CART_INFO_URL2).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                carrito = resultObj.data.articles;
+                mostrarProductosCarrito(carrito);
+                calcularEnvio();
+            }
+        });
+
+        let radios = document.getElementsByName('radio-envio');
+        for (let i = 0; i < radios.length; i++) {
+            radios[i].addEventListener('change', function () {
+                document.getElementById('costoFinal').innerHTML = calcularEnvio();
+            });
         }
     });
 
-    let radios = document.getElementsByName('radio-envio');
-    for (let i = 0; i < radios.length; i++) {
-        radios[i].addEventListener('change', function () {
-            document.getElementById('costoFinal').innerHTML = calcularEnvio();
-        });
-    }
-});
+    document.getElementById('formaDePago').addEventListener('change', function () {
 
-document.getElementById('formaDePago').addEventListener('change', function () {
+        let metodoPago = document.getElementById('formaDePago').value;
+        let div = document.getElementById('div-formaDePago');
 
-    let metodoPago = document.getElementById('formaDePago').value;
-    let div = document.getElementById('div-formaDePago');
-    let elementosTarjeta = document.getElementsByClassName('tarjeta');
-    let elementosTransferencia = document.getElementsByClassName('transferencia');
-
-    if (metodoPago == 'transferencia') {
-        div.innerHTML = `
-            <div id="transferencia">
-                <div class="form-group">
-                    <select class="form-control transferencia" required>
-                        <option>BROU</option>
-                        <option>Santander</option>
-                        <option>Itau</option>
-                        <option>BBVA</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control tarjeta" placeholder="Nombre del titular" required>
-                    <div class="invalid-feedback">
-                        Ingrese el nombre del titular por favor
+        if (metodoPago == 'transferencia') {
+            div.innerHTML = `
+                <div id="transferencia">
+                    <div class="form-group">
+                        <select class="form-control transferencia" required>
+                            <option>BROU</option>
+                            <option>Santander</option>
+                            <option>Itau</option>
+                            <option>BBVA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control tarjeta" placeholder="Nombre del titular" required>
+                        <div class="invalid-feedback">
+                            Ingrese el nombre del titular por favor
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control tarjeta" placeholder="Número de cuenta" pattern="[0-9]+" required>
+                        <div class="invalid-feedback">
+                            Ingrese el número por favor
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control tarjeta" placeholder="Número de cuenta" pattern="[0-9]+" required>
-                    <div class="invalid-feedback">
-                        Ingrese el número por favor
-                    </div>
-                </div>
-            </div>
-        `;
-    } else if (metodoPago == 'tarjeta') {
-        div.innerHTML = `
+            `;
+        } else if (metodoPago == 'tarjeta') {
+            div.innerHTML = `
             <div id="tarjeta">
                 <div class="form-group">
                     <input type="text" class="form-control tarjeta"
@@ -184,5 +189,5 @@ document.getElementById('formaDePago').addEventListener('change', function () {
                 </div>
             </div>
         `;
-    }
-});
+        }
+    });
