@@ -11,28 +11,35 @@ document.addEventListener("DOMContentLoaded", function (e) {
         `;
     }
 
-    document.getElementById("buttonIngresoLogin").addEventListener("click", function (e) {
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        let inputEmail = document.getElementById("inputEmailLogin");
+                        let inputPassword = document.getElementById("inputPasswordLogin"); // sin funcion
+                        localStorage.setItem('user-logged', JSON.stringify({
+                            email: inputEmail.value
+                        }));
+                        if (loginNeed) {
+                            localStorage.removeItem('login-need');
+                            window.location = loginNeed.from;
+                        } else {
+                            window.location = 'home.html';
+                        }
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-        let inputEmail = document.getElementById("inputEmailLogin");
-        let inputPassword = document.getElementById("inputPasswordLogin");
-
-        let camposCompletos = true;
-        if (inputEmail.value === '' || inputPassword.value === '') {
-            camposCompletos = false;
-            alert("Debes ingresar tus datos para continuar.");
-        }
-
-        if (camposCompletos) {
-            localStorage.setItem('user-logged', JSON.stringify({
-                email: inputEmail.value
-            }));
-            if (loginNeed) {
-                localStorage.removeItem('login-need');
-                window.location = loginNeed.from;
-            } else {
-                window.location = 'home.html';
-            }
-            
-        }
-    });
 });

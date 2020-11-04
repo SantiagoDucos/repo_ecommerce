@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>eMercado - Todo lo que busques está aquí</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,27 +12,43 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/login.css" />
 </head>
+
 <body class="text-center">
     <div class="container p-5">
+        <h2>Ingreso</h2>
         <div id="alert"></div>
-        <h2>Inicio de sesión</h2>
-        <label for="emailLogin">Email</label>
-        <input
-            class="form-control signin inputForm"
-            type="email"
-            id="inputEmailLogin"
-        />
-        <label for="passwordLogin">Contraseña</label>
-        <input
-            class="form-control signin inputForm"
-            type="password"
-            id="inputPasswordLogin"
-        />
-        <button class="btn btn-primary" id="buttonIngresoLogin">Ingresar</button>
+        <form class="needs-validation" novalidate>
+            <label for="validationCustomUsername">Email</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">📧</span>
+                </div>
+                <input type="email" class="form-control" id="inputEmailLogin" placeholder="Ingrese su email"
+                    aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Por favor ingrese su email.
+                </div>
+            </div>
+            <hr>
+            <label for="validationCustomUsername">Password</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">🔒</span>
+                </div>
+                <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Ingrese su contraseña"
+                    aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Por favor ingrese su contraseña.
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit" id="buttonIngresoLogin">Entrar</button>
+        </form>
     </div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/login.js"></script>
 </body>
+
 </html>

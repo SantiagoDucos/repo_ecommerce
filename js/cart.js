@@ -116,7 +116,7 @@ function ok() {
 
     document.addEventListener("DOMContentLoaded", function (e) {
 
-        isLogged('cart.html');
+        isLogged('cart.html', 'Para poder acceder a este sitio necesitas loguearte.');
 
         getJSONData(CART_INFO_URL2).then(function (resultObj) {
             if (resultObj.status === "ok") {
